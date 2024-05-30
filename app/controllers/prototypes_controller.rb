@@ -36,8 +36,11 @@ before_action :authenticate_user!, only: [:new,:edit,:destroy]
 
   def update
     @prototype = Prototype.find(params[:id])
-    @prototype.update(prototype_params)
-    redirect_to root_path
+    if @prototype.update(prototype_params)
+      redirect_to root_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
