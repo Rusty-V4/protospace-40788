@@ -37,7 +37,7 @@ before_action :authenticate_user!, only: [:new,:edit,:destroy]
   def update
     @prototype = Prototype.find(params[:id])
     if @prototype.update(prototype_params)
-      redirect_to root_path
+      redirect_to action: :show
     else
       render :edit, status: :unprocessable_entity
     end
